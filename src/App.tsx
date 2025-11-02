@@ -1,7 +1,16 @@
+import {
+  Registration,
+  type FormDataStructure,
+} from "./components/Registration";
+
 export const App = () => {
+  const handleFormSubmit = (registrationForm: FormDataStructure) => {
+    console.log("Registred user:", registrationForm);
+  };
+
   return (
     <div className="container">
-      <h1>Registrace</h1>
+      <Registration onFormSubmit={handleFormSubmit} />
     </div>
   );
 };
