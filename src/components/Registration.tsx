@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Registration.css";
 
 export interface FormDataStructure {
   username: string;
@@ -27,9 +28,14 @@ export const Registration = ({ onFormSubmit }: FormProps) => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
+    const { name, value } = e.target;
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
+      ...(name === "email" && value.includes("@") && !formData.username
+        ? { username: value.split("@")[0] }
+        : {}),
     });
   };
 
@@ -79,7 +85,7 @@ export const Registration = ({ onFormSubmit }: FormProps) => {
             onChange={handleChange}
           />
         </p>
-        <button>Register</button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );
